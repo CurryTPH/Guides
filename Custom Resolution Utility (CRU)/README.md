@@ -1,7 +1,7 @@
-# Custom Resolution Utility (CRU) Comprehensive Technical Guide
+# Custom Resolution Utility (CRU) Technical Guide
 
-*Version: 1.5.2 (with subsequent updates noted in the Change Log)*  
-*Last Updated: [Insert Date]*
+*Version: 1.5.2*  
+*Download: [cru-1.5.2.zip](https://www.monitortests.com/download/cru/cru-1.5.2.zip) - Source: [cru-1.5.2-src.zip](https://www.monitortests.com/download/cru/cru-1.5.2-src.zip)*
 
 ---
 
