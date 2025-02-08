@@ -1,223 +1,118 @@
-# Custom Resolution Utility (CRU) Technical Guide
+# Custom Resolution Utility (CRU) Guide for Everyday Users
 
-*Version: 1.5.2*  
-*Download: [cru-1.5.2.zip](https://www.monitortests.com/download/cru/cru-1.5.2.zip) - Source: [cru-1.5.2-src.zip](https://www.monitortests.com/download/cru/cru-1.5.2-src.zip)*
-
----
-
-## 1. Introduction
-
-Custom Resolution Utility (CRU) is an advanced EDID editor designed to allow users to define custom display resolutions, remove unwanted resolution entries, and edit additional parameters such as FreeSync/VRR ranges. CRU creates software EDID overrides stored in the Windows registry—without modifying the hardware EDID. This guide explains every aspect of CRU, from installation and setup to in-depth configuration, and is geared toward advanced users.
+Welcome to the simple guide for using the Custom Resolution Utility (CRU)! This tool lets you change how your monitor shows resolutions without any complicated technical steps. Follow this guide to safely add, remove, or modify display resolutions on your Windows computer.
 
 ---
 
-## 2. Objectives & Scope
+## What Is CRU?
 
-### Objectives
+CRU is a program that helps you:
+- **Add custom resolutions:** Set up new screen resolutions.
+- **Remove unwanted resolutions:** Clean up the list of available resolutions.
+- **Adjust settings:** Tweak refresh rates and other display options.
 
-- **Define and Modify EDIDs:** Understand how CRU reads, edits, and writes EDID data to create custom resolutions.
-- **Customization Capabilities:** Learn to add detailed resolutions, modify refresh rates, and manage FreeSync/VRR parameters.
-- **Diagnostics & Troubleshooting:** Gain insights into error handling and testing to ensure a stable configuration.
-- **Driver Interaction:** Explore CRU's interaction with AMD/ATI, NVIDIA, and Intel GPU drivers, including the impact of features such as Display Stream Compression (DSC).
-
-### Scope
-
-- **Supported Platforms:** Windows Vista and later (Windows XP is not supported).
-- **Supported Hardware:** AMD/ATI, NVIDIA GPUs, and Intel GPUs (with specific driver version requirements).
-- **Limitations:**  
-  - NVIDIA drivers may ignore EDID overrides when DSC is active.  
-  - Limited extension block support on Intel GPUs.
+**Note:** CRU makes changes in Windows’ registry (a special system database) but does not change your monitor’s hardware.
 
 ---
 
-## 3. Prerequisites
+## Requirements
 
-### Hardware Requirements
-
-- **Display:** A monitor that supports EDID overrides.
-- **GPU:**  
-  - AMD/ATI or NVIDIA GPU with appropriate drivers.  
-  - Intel GPUs: Newer models require the latest drivers; older models (external displays only) use an alternative installation method.
-
-### Software & Environment
-
-- **Operating System:** Windows Vista or later.
-- **Drivers:**  
-  - **NVIDIA:** Ensure your driver supports EDID overrides; note issues with DSC.  
-  - **AMD/ATI:** Latest drivers recommended; be aware of pixel clock limitations.  
-  - **Intel:**  
-    - Skylake (6th gen): Intel Graphics Driver [15.45] or newer.  
-    - Haswell/Broadwell (4th/5th gen): Intel Graphics Driver [15.40].  
-    - Haswell (Windows 7/8.1): Intel Graphics Driver [15.36].
-- **User Account Control (UAC):** Administrative privileges are required for registry modifications.
-- **Recovery Drive Preparedness:** Be familiar with booting Windows in safe mode to recover if display issues occur after EDID changes.
-
-### Background Knowledge
-
-- **EDID Structure:** Basic understanding of Extended Display Identification Data.
-- **Display Standards:** Familiarity with VESA DMT, CTA-861, CVT, and CVT-RB.
-- **Technical Terminology:** Pixel clock, refresh rates, and scaling concepts.
+- **Operating System:** Windows Vista or later (Windows XP is not supported)
+- **Graphics Card:** Any AMD, NVIDIA, or Intel GPU with the proper drivers installed.
+- **Backup:** It’s a good idea to create a system restore point or backup your system before making changes.
 
 ---
 
-## 4. Setup & Installation Instructions
+## Getting Started
 
-### 4.1 Downloading and Running CRU
+1. **Download CRU:**  
+   Get the latest version of CRU from the [official download page](#).
 
-1. **Obtain CRU:** Download the latest version of CRU from the official source or a trusted repository.
-2. **Extract Files:** Unzip the downloaded package to a secure directory.
-3. **Launch Application:**  
-   - Run `CRU.exe`.  
-   - Approve the UAC prompt to allow registry modifications.
+2. **Extract the Files:**  
+   Unzip the downloaded package into a folder you can easily access.
 
-### 4.2 Registry Considerations
-
-- **EDID Overrides:** CRU writes EDID overrides to the Windows registry without modifying the physical hardware.
-- **Backup Registry:** Back up your registry before making any changes.
-
-### 4.3 Restarting the Graphics Driver
-
-- **Using the Restart Utility:**  
-  - Run `restart.exe` (or `restart64.exe` on 64-bit systems) after saving changes.
-  - If the display does not return within 15 seconds, press **F8** to load recovery mode, temporarily unloading the overrides.
+3. **Run CRU:**  
+   Double-click on `CRU.exe`. You might see a prompt asking for permission—click **Yes**.
 
 ---
 
-## 5. Step-by-Step Procedures
+## How to Use CRU
 
-### Basic Usage
+### 1. Choose Your Display
 
-1. **Launch CRU.exe:**  
-   - Select the desired display from the drop-down list.  
-   - Displays marked as “(active)” are currently connected.  
-   - An asterisk (“*”) indicates an existing override.
-2. **Edit Resolutions:**  
-   - Use the “Copy” and “Paste” buttons to duplicate or import resolution sets (resolutions, extension blocks, and range limits).
-   - Click **OK** to commit your changes to the registry.
-3. **Restart the Graphics Driver:**  
-   - Execute `restart.exe` to apply the new settings.
-4. **Apply the Resolution:**  
-   - Navigate to Windows display settings to select the new resolution and refresh rate.  
-     - **Windows 10:** Right-click the desktop → **Display settings** → **Advanced display settings** → **Display adapter properties** → **Monitor** tab.  
-     - **Older Versions:** Right-click the desktop → **Screen resolution** → **Advanced settings** → **Monitor** tab.
+- **Select the Monitor:**  
+  At the top of the CRU window, use the drop-down menu to choose the display you want to modify.  
+  - Displays marked as **(active)** are currently connected.
+  - An asterisk (`*`) means an override has already been applied.
 
-### Detailed Resolution Editing
+### 2. Edit Resolutions
 
-- **Detailed Resolutions:**  
-  - The first detailed resolution is the native/preferred resolution.
-  - Additional detailed resolutions can be added using extension blocks if the resolution exceeds the EDID limits (4095×4095 pixels, 655.35 MHz pixel clock).
-- **Timing Options:**  
-  CRU offers multiple timing methods:
-  - **Manual:** Full control over timing parameters.
-  - **Automatic PC/HDTV/CRT:** Auto-configures values based on industry standards (CTA-861, VESA DMT, CVT-RB).
-  - **Exact Options:** “Exact”, “Exact reduced”, and “Exact CRT” for achieving integer refresh rates.
-  - **Vertical Total Calculator:** Useful for implementing Quick Frame Transport (QFT).
+- **To Add or Change a Resolution:**  
+  Click on the resolution you want to modify and adjust the settings.
+  
+- **To Remove a Resolution:**  
+  Select the resolution and click the **Delete** button.
 
-### Editing FreeSync/VRR Ranges
+- **Copy & Paste Settings:**  
+  Use the **Copy** and **Paste** buttons if you want to duplicate settings from one resolution to another.
 
-- **DisplayPort:**  
-  - Click the **Edit…** button to modify the “V rate” in the range limits.
-  - Ensure the option **Include if slot available** is enabled.
-- **HDMI FreeSync and HDMI 2.1 VRR:**  
-  - Edit the respective data blocks (FreeSync range and HDMI 2.1 support) in the CTA-861 extension block.
-  - **Note for NVIDIA:** Some ranges are hard-coded; a workaround is to change the device ID (e.g., to “ABC1234”).
+### 3. Save and Apply Your Changes
 
-### Using Extension Blocks
+- **Save Changes:**  
+  Click **OK** in CRU to save your new settings to the registry.
+  
+- **Restart the Graphics Driver:**  
+  Run `restart.exe` (or `restart64.exe` if you have a 64-bit system).  
+  - **Tip:** If nothing happens within 15 seconds, press **F8** to load recovery mode (this unloads the changes temporarily).
 
-- **Purpose:**  
-  Extension blocks enable the addition of extra detailed resolutions, TV resolutions, audio formats, and HDMI/DisplayPort support.
-- **Types of Extension Blocks:**  
-  - **CTA-861:** Contains detailed resolutions and data blocks.
-  - **VTB-EXT:** Adds more standard resolutions (only one allowed on AMD/ATI and must be the last block).
-  - **DisplayID:** Supports resolutions beyond standard EDID limits.
-- **Importing Blocks:**  
-  - Import pre-made extension block files (e.g., `hdmi.dat`, `hdmi-audio.dat`, `hdmi2.dat`) as a starting point.
+### 4. Set Your New Resolution in Windows
 
-### Alternative Method for Intel GPUs
+1. **Right-Click on the Desktop:**  
+   Choose **Display settings** (or **Screen resolution** on older versions of Windows).
 
-- **Older Intel GPUs:**  
-  - Use the **Export…** button and select **EXE file** to create a self-contained EDID override installer.
-  - Run the resulting `.exe` and select **Install EDID** to apply the override on all matching displays.
+2. **Advanced Settings:**  
+   Click **Advanced display settings** and then **Display adapter properties**.
+
+3. **Select the Monitor Tab:**  
+   Choose your new resolution and refresh rate from the list.
 
 ---
 
-## 6. Parameter & Value Justifications
+## Troubleshooting Tips
 
-- **Resolution Limits:**  
-  EDID detailed resolutions are capped at 4095×4095 pixels and 655.35 MHz pixel clock due to protocol constraints. Use DisplayID for higher values.
-- **Timing Parameters:**  
-  Automatic timing modes (e.g., PC/HDTV/CRT) leverage industry standards (CTA-861, VESA DMT, CVT-RB) to balance compatibility and performance.
-- **Pixel Clock Constraints:**  
-  Single-link DVI is limited to 165 MHz; dual-link to 330 MHz; HDMI/DisplayPort limits vary by GPU. Patching tools (e.g., AMD/ATI or NVIDIA Pixel Clock Patcher) may be required for non-standard setups.
-- **FreeSync/VRR Considerations:**  
-  Adjusting the “V rate” or data block parameters ensures the display operates within the supported variable refresh range.
+- **Screen Not Coming Back:**  
+  If your screen doesn’t appear after restarting the driver, wait 15 seconds. If it still doesn’t work, press **F8** to enter recovery mode.
 
----
-
-## 7. Testing & Validation Methods
-
-### Unit and Integration Testing
-
-- **Visual Confirmation:**  
-  Verify the custom resolution appears in Windows display settings and is selectable.
-- **Driver Restart Testing:**  
-  After running `restart.exe`, confirm the driver reloads the new EDID override without crashing.
-- **Timing and Refresh Rate Validation:**  
-  Test various timing modes and refresh rates using built-in display diagnostics or third-party tools.
-
-### Expected Outcomes
-
-- **Resolution Listing:**  
-  The selected display should list all detailed and standard resolutions, with the native resolution flagged.
-- **Functionality:**  
-  Switching resolutions should occur without screen artifacts or driver crashes.
-- **Recovery Mode:**  
-  If display issues occur, using recovery mode (F8 during restart) should unload overrides and restore defaults.
-
----
-
-## 8. Error Handling & Troubleshooting
-
-### Common Issues
-
-- **Display Not Returning After Changes:**  
-  Wait 15 seconds for the driver to reload. If the display does not appear, press **F8** to enter recovery mode.
 - **Driver Crashes:**  
-  If the driver crashes during restart, re-run `restart.exe` to re-enable the graphics driver.
-- **Non-Recognized EDID Overrides:**  
-  NVIDIA drivers may ignore EDID overrides when Display Stream Compression (DSC) is active. Report such issues to NVIDIA.
+  If your graphics driver crashes, simply run `restart.exe` again.
 
-### Debugging Tips
-
-- **Registry Verification:**  
-  Check that registry entries under the EDID override keys are correctly written.
-- **Log Files and Diagnostic Utilities:**  
-  Use Windows Event Viewer or third-party tools to inspect errors during driver restart.
-- **Safe Mode:**  
-  Use Windows Safe Mode (via a recovery drive) to remove problematic overrides using the **Delete** button or `reset-all.exe`.
+- **Reset to Default Settings:**  
+  To go back to your original settings, open CRU, click the **Delete** button for the override, then run `reset-all.exe` and restart your computer.
 
 ---
 
-## 9. Source & Reference Transparency
+## Special Notes
 
-- **Official CRU Documentation:** Refer to the README and change log included with CRU.
-- **Third-Party Tools:**  
-  - [AMD/ATI Pixel Clock Patcher](#)  
-  - [NVIDIA Pixel Clock Patcher](#)
-- **Standards & Protocols:**  
-  - VESA DMT, CTA-861, CVT, CVT-RB specifications.
-- **Community Resources:**  
-  - [Overclock.net](https://www.overclock.net/)  
-  - [Reddit’s r/overclocking](https://www.reddit.com/r/overclocking/)
+- **For Older Intel GPU Users:**  
+  If you have an older Intel graphics card, click the **Export...** button in CRU and choose **EXE file**. Run the created installer to apply the changes.
+
+- **For NVIDIA Users:**  
+  Some NVIDIA drivers may ignore changes when Display Stream Compression (DSC) is active. If you have issues, check your NVIDIA settings or look for driver updates.
 
 ---
 
-## 10. Annotated Code & Command Samples
+## Final Thoughts
 
-Although CRU is primarily a GUI-based tool, several command-line utilities are provided.
+Changing your display resolution with CRU can make your computer work exactly the way you want it to, whether you’re gaming, watching videos, or just browsing. Just remember:
+- **Backup First:** Always create a restore point before making changes.
+- **Follow the Steps:** Take your time and follow the guide step-by-step.
+- **Ask for Help:** If you get stuck, check out online forums or ask a friend.
 
-### Restarting the Graphics Driver
+Happy customizing!
 
-```batch
-:: Restart the graphics driver quietly
-restart.exe /q
+---
+
+## Additional Resources
+
+- [Official CRU Download](#)
+- [Community Forums & Help](#)
