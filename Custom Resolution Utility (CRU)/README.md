@@ -5,38 +5,6 @@
 
 ---
 
-## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Objectives & Scope](#objectives--scope)
-3. [Prerequisites](#prerequisites)
-4. [Setup & Installation Instructions](#setup--installation-instructions)
-5. [Step-by-Step Procedures](#step-by-step-procedures)
-    - [Basic Usage](#basic-usage)
-    - [Detailed Resolution Editing](#detailed-resolution-editing)
-    - [Editing FreeSync/VRR Ranges](#editing-freesyncvrr-ranges)
-    - [Using Extension Blocks](#using-extension-blocks)
-    - [Alternative Method for Intel GPUs](#alternative-method-for-intel-gpus)
-6. [Parameter & Value Justifications](#parameter--value-justifications)
-7. [Testing & Validation Methods](#testing--validation-methods)
-8. [Error Handling & Troubleshooting](#error-handling--troubleshooting)
-9. [Source & Reference Transparency](#source--reference-transparency)
-10. [Annotated Code & Command Samples](#annotated-code--command-samples)
-11. [Versioning & Change Logs](#versioning--change-logs)
-12. [Performance & Scalability Considerations](#performance--scalability-considerations)
-13. [Security Considerations](#security-considerations)
-14. [Visual Aids & Diagrams](#visual-aids--diagrams)
-15. [Alternative Approaches & Comparative Analysis](#alternative-approaches--comparative-analysis)
-16. [Extensibility & Customization Guidelines](#extensibility--customization-guidelines)
-17. [Real-World Use Cases & Examples](#real-world-use-cases--examples)
-18. [Data Sources & Handling](#data-sources--handling)
-19. [Licensing, Credits, & Contributions](#licensing-credits--contributions)
-20. [Interactive Components & Community Feedback](#interactive-components--community-feedback)
-21. [Final Summary & Additional Resources](#final-summary--additional-resources)
-22. [Appendices](#appendices)
-
----
-
 ## 1. Introduction
 
 Custom Resolution Utility (CRU) is an advanced EDID editor designed to allow users to define custom display resolutions, remove unwanted resolution entries, and edit additional parameters such as FreeSync/VRR ranges. CRU creates software EDID overrides stored in the Windows registry—without modifying the hardware EDID. This guide explains every aspect of CRU, from installation and setup to in-depth configuration, and is geared toward advanced users.
