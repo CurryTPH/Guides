@@ -7,7 +7,7 @@ This documentation provides details on all registry keys located under:
 HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000\
 ```
 
-These registry keys are used to configure and manage the display adapter at boot.
+These registry keys are used to configure and manage the display adapter at boot and are all sorted by startup time:
 
 ## Registry Keys
 
