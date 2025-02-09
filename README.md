@@ -1,90 +1,121 @@
-Display Adapter Registry Keys Documentation
+# Display Adapter Registry Keys Documentation
 
-All registry keys listed below are located in:
+## Overview
+This documentation provides details on all registry keys located under:
 
+```
 HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000\
+```
 
-EnableGpuFirmware
+These registry keys are used to configure and manage the display adapter at boot.
 
-No additional information provided.
+## Registry Keys
 
-EnableRmTestOnlyCode
+### EnableGpuFirmware
+Description: (No information available)
 
-No additional information provided.
+### EnableRmTestOnlyCode
+Description: (No information available)
 
-EncSessionStatsReportingState
+### EncSessionStatsReportingState
+**Type:** DWORD  
+**Description:** Allows changing the state of NVENC session stats reporting. Currently only used for Grid.
+- `0x00000000` - Disable NVENC session stats reporting.
+- `0x00000001` - Enable NVENC session stats reporting.
 
-Type: DWORDThis registry key controls NVENC session stats reporting. Currently, it is used only for GRID.
+### EPC_HWSLOW_FC7E081B
+**Type:** DWORD  
+**Description:** If set to non-zero, overrides AC/DC state of GPIO_FUNC_EXT_PERF_CONTROL_HWSLOW with MMIO `0xFC7E081B`.
 
-0x00000000 - Disable NVENC session stats reporting.
+### GridLicensedFeatures
+**Type:** DWORD  
+**Description:** Specifies supported GRID licensed features.
+- `0x00000000` - Disabled
+- `0x00000001` - Quadro Enabled
+- `0x00000001` - vGPU Enabled
+- `0x00000001` - GeForce Enabled
+- `0x00000001` - Compute Enabled
 
-0x00000001 - Enable NVENC session stats reporting.
+### L40GCompatibilityMode
+Description: (No information available)
 
-#define NV_REG_STR_RM_NVENC_SESSION_STATS_REPORTING_STATE "EncSessionStatsReportingState"
-#define NV_REG_STR_RM_NVENC_SESSION_STATS_REPORTING_STATE_DISABLED 0x00000000
-#define NV_REG_STR_RM_NVENC_SESSION_STATS_REPORTING_STATE_ENABLED 0x00000001
+### PeerMappingOverride
+**Type:** DWORD  
+**Description:** Enables/disables the workaround for bug 1630288 where third-party peer mappings are disabled.
+- Default: Disabled
 
-EPC_HWSLOW_FC7E081B
+### RMBifMnocOverride
+Description: (No information available)
 
-Type: DWORDIf set to a non-zero value, overrides AC/DC state of GPIO_FUNC_EXT_PERF_CONTROL_HWSLOW with MMIO 0xFC7E081B.
+### RMFermiMinGpmFifoDepth
+**Type:** DWORD  
+**Description:** Specifies the minimum GPM FIFO depth.
 
-#define NV_REG_STR_RM_EPC_HWSLOW_FC7E081B "EPC_HWSLOW_FC7E081B"
+### RMHotPlugI2cDisplays
+**Type:** DWORD  
+**Description:** Sets the device map for which hardware I2C will monitor and report.
 
-GridLicensedFeatures
+### RmMClkSwitchOnFbflcn
+**Type:** DWORD  
+**Description:** Controls MCLK switch on FB Falcon.
+- `0x00000000` - Disabled (Default)
+- `0x00000001` - Enabled
 
-Type: DWORDSet to supported GRID licensed features:
+### RMOverrideSmSpeedSelect
+**Type:** DWORD  
+**Description:** Allows setting the `SM_SPEED_SELECT` through registry keys (used in verification builds only).
 
-0x00000000 - Disabled
+### RMPcieFLRPolicy
+**Type:** DWORD  
+**Description:** Forces the disablement of Function Level Reset (FLR).
+- `0` - Default Policy
+- `1` - Force Disable FLR
 
-0x00000001 - Enabled for specific features
+### RMSkip2d3dBundleInit
+**Type:** DWORD  
+**Description:** Controls initialization behavior for 2D/3D bundle.
+- `0x00000000` - Full bundle init
+- `0x00000001` - Skip 2D/3D bundle init
 
-Supported feature definitions:
+### RMSlcg
+**Type:** DWORD  
+**Description:** Used to disable Second Level Clock Gating (SLCG) settings.
+- `0` - Enable SLCG (Default)
+- `1` - Disable SLCG
 
-#define NV_REG_STR_RM_GRID_LICENSED_FEATURES "GridLicensedFeatures"
-#define NV_REG_STR_RM_GRID_LICENSED_FEATURES_QUADRO 0:0
-#define NV_REG_STR_RM_GRID_LICENSED_FEATURES_VGPU 1:1
-#define NV_REG_STR_RM_GRID_LICENSED_FEATURES_GEFORCE 2:2
-#define NV_REG_STR_RM_GRID_LICENSED_FEATURES_COMPUTE 3:3
+### RMSwdxDirectCtxswSkip
+**Type:** DWORD  
+**Description:** Controls whether RM tells the microcode to skip `swdx direct context switch`.
+- `0x00000000` - Allow swdx direct ctxsw
+- `0x00000001` - Skip swdx direct ctxsw
 
-L40GCompatibilityMode
+### RmWatchDogInterval
+**Type:** DWORD  
+**Description:** Sets watchdog interval.
+- `0x00000007` - Low
+- `0x0000000C` - High
 
-No additional information provided.
+### TestAnalogLoadAlways
+**Type:** DWORD  
+**Description:** Controls whether an analog load test is always run when detecting CRT or FP devices.
 
-PeerMappingOverride
+### EnableGpuFirmwareLogs
+Description: (No information available)
 
-Type: DWORDEnables/Disables the workaround for bug 1630288, which disables third-party peer mappings. Disabled by default.
+### RMDisableHdcp22
+**Type:** DWORD  
+**Description:** Disables HDCP22 feature.
+- `0x00000000` - Enabled
+- `0x00000001` - Disabled
 
-#define NV_REG_STR_PEERMAPPING_OVERRIDE "PeerMappingOverride"
-#define NV_REG_STR_PEERMAPPING_OVERRIDE_DEFAULT 0
+### RMDisableRamchainScrub
+**Type:** DWORD  
+**Description:** Controls whether RM tells the microcode to disable RAM chain scrub.
+- `0x00000000` - Not disabled
+- `0x00000001` - Disabled
 
-RMBifMnocOverride
+## Contributing
+If you have additional information about any of these registry keys or new registry keys to document, please submit a pull request.
 
-No additional information provided.
-
-RMFermiMinGpmFifoDepth
-
-Type: DWORDNumeric value encoding FIFO depth.
-
-#define NV_REG_STR_FERMI_MIN_GPM_FIFO_DEPTH "RMFermiMinGpmFifoDepth"
-
-RMHotPlugI2cDisplays
-
-Type: DWORDSet of device maps for which HW I2C will monitor and report.
-
-#define NV_REG_STR_HOTPLUG_I2C_DISPLAYS "RMHotPlugI2cDisplays"
-
-RmMClkSwitchOnFbflcn
-
-Type: DWORD (Boolean)Enable MCLK switch on FB falcon, offloading execution from RM to FB falcon.
-
-0x00000000 - Disabled
-
-0x00000001 - Enabled
-
-#define NV_REG_STR_RM_MCLK_SWITCH_ON_FBFLCN "RmMClkSwitchOnFbflcn"
-#define NV_REG_STR_RM_MCLK_SWITCH_ON_FBFLCN_DISABLE (0x00000000)
-#define NV_REG_STR_RM_MCLK_SWITCH_ON_FBFLCN_ENABLE (0x00000001)
-
-RMOverrideSmSpeedSelect
-
-Type: DWORDAllows setting SM_SPEED_SELECT via registry keys. Takes effect in verification builds only.
+## License
+This documentation is provided under the MIT License.
